@@ -8,7 +8,7 @@ class LocationForm extends Component {
 		return (
 			<form className="location-form">
 				<div className="form-input">
-					<label for="location" className="sr-only">Location</label>
+					<label htmlFor="location" className="sr-only">Location</label>
 					<input type="text" name="location" className="form-text" placeholder="Search for a city"></input>
 				</div>
 				<div className="sr-only">
@@ -34,11 +34,16 @@ class LocationList extends Component {
 
 class LocationSearch extends Component {
 	
+	constructor(props) {
+		super(props);
+	}
+	
 	render() {
 		return (
 			<div className="location-search">
 				<LocationForm />
 				<LocationList />
+				<button className="cancel-button" onClick={this.props.onClick}>Cancel</button>
 			</div>
 		);
 		
@@ -51,8 +56,8 @@ class ForecastDetail extends Component {
 		return (
 			<div className="forecast-detail">
 				<h2 className="forecast-day">Today</h2>
-				<img class="forecast-icon" src="./icons/weather-sun.svg" />
-				<p class="forecast-text">Sunny</p>
+				<img className="forecast-icon" src="./icons/weather-sun.svg" />
+				<p className="forecast-text">Sunny</p>
 				<p className="forecast-temp">30&deg;C</p>
 			</div>
 		);
@@ -95,6 +100,8 @@ class Weather extends Component {
 			forecastResponse: null,
 		};
 		
+		this.changeViewFromClick = this.changeViewFromClick.bind(this);
+		
 	}
 	
 	getWeather() {
@@ -102,13 +109,37 @@ class Weather extends Component {
 			.then(response => console.log(response))
 	}
 	
+	changeViewFromClick(e) {
+		console.log('click');
+		e.preventDefault();
+		this.toggleView();
+	}
+	
+	toggleView() {
+		const newView = this.state.activeView !== 'LocationSearch' ? 'LocationSearch' : 'Forecast';
+		this.setState({activeView: newView});
+	}
+	
+	renderActiveView() {
+		if (this.state.activeView === 'LocationSearch') {
+			return (
+				<LocationSearch onClick={this.changeViewFromClick} />
+			);
+		} else if (this.state.activeView === 'Forecast') {
+			return (
+				<div className="forecast-wrapper">
+					<h2 className="location-name"><a href="#" onClick={this.changeViewFromClick}>Brighton</a></h2>
+					<Forecast />
+				</div>
+			);
+		}
+	}
+	
 	render() {
 		//this.getWeather();
 		return (
 			<div className="weather">
-				<LocationSearch />
-				<h2 className="location-name">Brighton</h2>
-				<Forecast />
+				{this.renderActiveView()}
 			</div>
 		);
 	}
