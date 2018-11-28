@@ -9,7 +9,7 @@ class LocationForm extends Component {
 			<form className="location-form">
 				<div className="form-input">
 					<label htmlFor="location" className="sr-only">Location</label>
-					<input type="text" name="location" className="form-text" placeholder="Search for a city"></input>
+					<input autoFocus type="text" name="location" className="form-text" placeholder="Search for a city"></input>
 				</div>
 				<div className="sr-only">
 					<button>Search</button>
