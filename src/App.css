@@ -1,32 +1,152 @@
-.App {
-  text-align: center;
+:root {
+	--bar-background-colour: #282c34;
+	--bar-foreground-colour: #fff;
+	--body-background-colour: #fff;
+	--body-foreground-colour: #000;
+	--link-colour: #61dafb;
+	--normal-font-size: 12px;
+	--mid-font-size: 16px;
+	--large-font-size: 20px;
+	--larger-font-size: 28px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+* {
+	box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	font-size: var(--normal-font-size);
+}
+
+.App {
+	display: flex;
+	flex-direction: column;
+  text-align: center;
+	min-height: 100vh;
+}
+
+.App-header, 
+.App-footer {
+	background-color: var(--bar-background-colour);
+	color: var(--bar-foreground-colour);
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  min-height: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: var(--large-font-size);
 }
 
-.App-link {
-  color: #61dafb;
+.App-body {
+	flex-grow: 2;
+	padding: 20px 20px;
+	background-color: var(--body-background-colour);
+	color: var(--body-foreground-colour);
+	font-size: var(--normal-font-size);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-footer {
+	font-size: var(--normal-font-size);
+}
+
+.App-link,
+a {
+  color: var(--link-colour);
+}
+
+.sr-only {
+	display: block;
+	width: 1px;
+	height: 1px;
+	text-indent: -9999px;
+}
+
+/** App Header */
+.App-header h1 {
+	font-size: var(--large-font-size);
+}
+
+/** Location Search */
+.location-search {
+	font-size: 18px;
+	text-align: left;
+}
+
+.location-search input.form-text {
+	display: block;
+	width: 100%;
+	background: transparent;
+	border: 1px solid var(--body-foreground-colour);
+	padding: 12px;
+	font-size: var(--large-font-size);
+}
+
+/** Location list */
+ul.location-list {
+	display: block;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border-left: 1px solid var(--body-foreground-colour);
+	border-right: 1px solid var(--body-foreground-colour);
+}
+
+ul.location-list li {
+	border-bottom: 1px solid var(--body-foreground-colour);
+	padding: 12px;
+}
+ul.location-list li a {
+	text-decoration: none;
+	color: var(--body-foreground-colour);
+}
+
+/** Location Name */
+.location-name {
+	font-size: var(--larger-font-size);
+}
+
+/** Forecast */
+.forecast-day {
+	font-size: var(--mid-font-size);
+}
+
+.forecast-text {
+	font-size: var(--large-font-size);
+}
+
+.forecast-temp {
+	font-size: var(--mid-font-size);
+}
+
+/** Forecast date select */
+ul.forecast-date-select {
+	display: flex;
+	list-style-type: none;
+	justify-content: center;
+	margin: 20px -1px 0;
+	padding: 0;
+}
+
+ul.forecast-date-select li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	background-color: #ddd;
+	margin: 0 1px;
+}
+ul.forecast-date-select li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	line-height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	color: var(--body-foreground-colour);
+	text-decoration: none;
 }
