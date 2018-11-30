@@ -4,12 +4,22 @@ import './App.css';
 
 class LocationForm extends Component {
 	
+	constructor(props) {
+		super(props);
+		
+		this.onSearchValueChange = this.onSearchValueChange.bind(this);
+	}
+	
+	onSearchValueChange(event) {
+		this.props.searchForLocations(event.target.value);
+	}
+	
 	render() {
 		return (
 			<form className="location-form">
 				<div className="form-input">
 					<label htmlFor="location" className="sr-only">Location</label>
-					<input autoFocus type="text" name="location" className="form-text" placeholder="Search for a city"></input>
+					<input autoFocus type="text" name="location" className="form-text" placeholder="Search for a city" onChange={this.onSearchValueChange}></input>
 				</div>
 				<div className="sr-only">
 					<button>Search</button>
@@ -22,11 +32,20 @@ class LocationForm extends Component {
 class LocationList extends Component {
 	
 	render() {
+		const resultsMarkup = this.props.searchResults.map((row, index) => {
+			return (
+				<li key={index}>
+					<a href={'#'+row.woeid} onClick={(e) => {
+							e.preventDefault();
+							this.props.changeCity(row.woeid)}
+					}>{row.title}</a>
+				</li>
+			);
+		});
+		
 		return (
 			<ul className="location-list">
-				<li><a href="#">Location one</a></li>
-				<li><a href="#">Location two</a></li>
-				<li><a href="#">Location three</a></li>
+				{resultsMarkup}
 			</ul>
 		);
 	}
@@ -36,13 +55,30 @@ class LocationSearch extends Component {
 	
 	constructor(props) {
 		super(props);
+		this.state = {
+			searchValue: '',
+			searchResults: []
+		};
+		
+		this.searchForLocations = this.searchForLocations.bind(this);
+	}
+	
+	searchForLocations(query) {
+		fetch('http://localhost/apiproxy/metaweather.php?method=location/search&query='+query)
+			.then(response => response.json())
+			.then(data => {
+				this.setState({
+					searchValue: query,
+					searchResults: data.slice(0, 10)					
+				});
+			});
 	}
 	
 	render() {
 		return (
 			<div className="location-search">
-				<LocationForm />
-				<LocationList />
+				<LocationForm searchForLocations={this.searchForLocations} />
+				<LocationList searchResults={this.state.searchResults} changeCity={this.props.changeCity} />
 				<button className="cancel-button" onClick={this.props.onClick}>Cancel</button>
 			</div>
 		);
@@ -95,22 +131,30 @@ class Weather extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			activeView: 'Forecast',
+			activeView: 'LocationSearch',
 			woeid: 13911, // Brighton
 			forecastResponse: null,
 		};
 		
 		this.changeViewFromClick = this.changeViewFromClick.bind(this);
+		this.changeCity = this.changeCity.bind(this);
 		
 	}
 	
+	changeCity(woeid) {
+		this.setState({
+			activeView: 'Forecast',
+			woeid: woeid
+		});
+	}
+	
 	getWeather() {
-		fetch('https://www.metaweather.com/api/location/'+this.state.woeid+'/')
-			.then(response => console.log(response))
+		fetch('http://localhost/apiproxy/metaweather.php?method=location/'+this.state.woeid)
+			.then(response => response.json())
+			.then(data => console.log(data));
 	}
 	
 	changeViewFromClick(e) {
-		console.log('click');
 		e.preventDefault();
 		this.toggleView();
 	}
@@ -123,7 +167,7 @@ class Weather extends Component {
 	renderActiveView() {
 		if (this.state.activeView === 'LocationSearch') {
 			return (
-				<LocationSearch onClick={this.changeViewFromClick} />
+				<LocationSearch onClick={this.changeViewFromClick} changeCity={this.changeCity} />
 			);
 		} else if (this.state.activeView === 'Forecast') {
 			return (
