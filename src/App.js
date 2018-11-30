@@ -117,9 +117,32 @@ class ForecastDateSelect extends Component {
 
 class Forecast extends Component {
 	
+	constructor(props) {
+		super(props);
+		this.state = {
+			location: '---'
+		};
+	}
+	
+	getWeather() {
+		fetch('http://localhost/apiproxy/metaweather.php?method=location/'+this.props.woeid)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				this.setState({
+						location: data.title
+					});
+				});
+	}
+	
+	componentWillMount() {
+		this.getWeather();
+	}
+	
 	render() {
 		return (
 			<div className="forecast">
+				<h2 className="location-name"><a href="#" onClick={this.props.onClick}>{this.state.location}</a></h2>
 				<ForecastDetail />
 				<ForecastDateSelect />
 			</div>
@@ -148,12 +171,6 @@ class Weather extends Component {
 		});
 	}
 	
-	getWeather() {
-		fetch('http://localhost/apiproxy/metaweather.php?method=location/'+this.state.woeid)
-			.then(response => response.json())
-			.then(data => console.log(data));
-	}
-	
 	changeViewFromClick(e) {
 		e.preventDefault();
 		this.toggleView();
@@ -171,16 +188,12 @@ class Weather extends Component {
 			);
 		} else if (this.state.activeView === 'Forecast') {
 			return (
-				<div className="forecast-wrapper">
-					<h2 className="location-name"><a href="#" onClick={this.changeViewFromClick}>Brighton</a></h2>
-					<Forecast />
-				</div>
+				<Forecast onClick={this.changeViewFromClick} woeid={this.state.woeid} />
 			);
 		}
 	}
 	
 	render() {
-		//this.getWeather();
 		return (
 			<div className="weather">
 				{this.renderActiveView()}
