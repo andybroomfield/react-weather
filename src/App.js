@@ -154,7 +154,7 @@ class ForecastDateSelect extends Component {
 				<li key={index}><a href={'#day'+index} onClick={(e) => {
 					e.preventDefault();
 					this.props.changeDay(index);
-				}}>{this.getShortDate(row.applicable_date)}</a></li>
+				}} className={index == this.props.selectedDay? 'active' : null}>{this.getShortDate(row.applicable_date)}</a></li>
 			);
 		});
 		

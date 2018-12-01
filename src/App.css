@@ -171,3 +171,7 @@ ul.forecast-date-select li a {
 	color: var(--body-foreground-colour);
 	text-decoration: none;
 }
+
+ul.forecast-date-select li a.active {
+	background-color: var(--link-colour);
+}
