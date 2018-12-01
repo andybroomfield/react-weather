@@ -64,7 +64,7 @@ class LocationSearch extends Component {
 	}
 	
 	searchForLocations(query) {
-		fetch('http://localhost/apiproxy/metaweather.php?method=location/search&query='+query)
+		fetch('https://api-proxy.newmediathinking.com/metaweather.php?method=location/search&query='+query)
 			.then(response => response.json())
 			.then(data => {
 				this.setState({
@@ -186,7 +186,7 @@ class Forecast extends Component {
 	}
 	
 	getWeather() {
-		fetch('http://localhost/apiproxy/metaweather.php?method=location/'+this.props.woeid)
+		fetch('https://api-proxy.newmediathinking.com/metaweather.php?method=location/'+this.props.woeid)
 			.then(response => response.json())
 			.then(data => {
 				this.setState({
