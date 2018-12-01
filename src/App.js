@@ -88,6 +88,13 @@ class LocationSearch extends Component {
 
 class ForecastDetail extends Component {
 	
+	getForecastDate() {
+		let todayDate = new Date();
+		let forecastDate = new Date(this.props.weather.applicable_date);
+		
+		return todayDate.setHours(0,0,0,0) === forecastDate.setHours(0,0,0,0) ? 'Today' : forecastDate.toLocaleDateString('en-US', { weekday: 'long' }); 
+	}
+	
 	getWeatherIcon() {
 		const icons = {
 			sn: 'snow',
@@ -119,7 +126,7 @@ class ForecastDetail extends Component {
 		} else {
 			return (
 				<div className="forecast-detail">
-					<h2 className="forecast-day">Today</h2>
+					<h2 className="forecast-day">{this.getForecastDate()}</h2>
 					<img className="forecast-icon" src={this.getWeatherIcon()} />
 					<p className="forecast-text">{this.getWeatherStateName()}</p>
 					<p className="forecast-temp">{parseFloat(this.props.weather.the_temp).toFixed(1)}&deg;C</p>
@@ -131,14 +138,29 @@ class ForecastDetail extends Component {
 
 class ForecastDateSelect extends Component {
 	
+	getShortDate(forecastDateStr) {
+
+		const forecastDate = new Date(forecastDateStr);
+		return forecastDate.toLocaleDateString('en-US', { weekday: 'narrow' }); 
+	}
+	
 	render() {
+		if (!Array.isArray(this.props.allWeather)) {
+			return null;
+		}
+		
+		const dateSelectMarkup = this.props.allWeather.map((row, index) => {
+			return (
+				<li key={index}><a href={'#day'+index} onClick={(e) => {
+					e.preventDefault();
+					this.props.changeDay(index);
+				}}>{this.getShortDate(row.applicable_date)}</a></li>
+			);
+		});
+		
 		return (
 			<ul className="forecast-date-select">
-				<li><a href="#">M</a></li>
-				<li><a href="#">T</a></li>
-				<li><a href="#">W</a></li>
-				<li><a href="#">T</a></li>
-				<li><a href="#">F</a></li>
+				{dateSelectMarkup}
 			</ul>
 		);
 	}
@@ -153,13 +175,20 @@ class Forecast extends Component {
 			weather: [],
 			day: 0
 		};
+		
+		this.changeDay = this.changeDay.bind(this);
+	}
+	
+	changeDay(newDay) {
+		if (typeof(this.state.weather[newDay]) !== 'undefined') {
+			this.setState({day: newDay});
+		}
 	}
 	
 	getWeather() {
 		fetch('http://localhost/apiproxy/metaweather.php?method=location/'+this.props.woeid)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
 				this.setState({
 						location: data.title,
 						weather: data.consolidated_weather
@@ -178,7 +207,7 @@ class Forecast extends Component {
 			<div className="forecast">
 				<h2 className="location-name"><a href="#" onClick={this.props.onClick}>{this.state.location}</a></h2>
 				<ForecastDetail weather={displayWeather} />
-				<ForecastDateSelect />
+				<ForecastDateSelect allWeather={this.state.weather} selectedDay={this.state.day} changeDay={this.changeDay} />
 			</div>
 		);
 	}
