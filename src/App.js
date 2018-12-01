@@ -79,7 +79,7 @@ class LocationSearch extends Component {
 			<div className="location-search">
 				<LocationForm searchForLocations={this.searchForLocations} />
 				<LocationList searchResults={this.state.searchResults} changeCity={this.props.changeCity} />
-				<button className="cancel-button" onClick={this.props.onClick}>Cancel</button>
+				<button className="cancel-button" onClick={this.props.changeViewFromClick}>Cancel</button>
 			</div>
 		);
 		
@@ -205,7 +205,7 @@ class Forecast extends Component {
 		
 		return (
 			<div className="forecast">
-				<h2 className="location-name"><a href="#" onClick={this.props.onClick}>{this.state.location}</a></h2>
+				<h2 className="location-name"><a href="#" onClick={this.props.changeViewFromClick}>{this.state.location}</a></h2>
 				<ForecastDetail weather={displayWeather} />
 				<ForecastDateSelect allWeather={this.state.weather} selectedDay={this.state.day} changeDay={this.changeDay} />
 			</div>
@@ -247,11 +247,11 @@ class Weather extends Component {
 	renderActiveView() {
 		if (this.state.activeView === 'LocationSearch') {
 			return (
-				<LocationSearch onClick={this.changeViewFromClick} changeCity={this.changeCity} />
+				<LocationSearch changeViewFromClick={this.changeViewFromClick} changeCity={this.changeCity} />
 			);
 		} else if (this.state.activeView === 'Forecast') {
 			return (
-				<Forecast onClick={this.changeViewFromClick} woeid={this.state.woeid} />
+				<Forecast changeViewFromClick={this.changeViewFromClick} woeid={this.state.woeid} />
 			);
 		}
 	}
