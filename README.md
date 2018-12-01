@@ -1,3 +1,15 @@
+# React Weather
+A weather app.
+
+I built this as part of me learning React. 
+- learning how to create React components
+- learning how to pass and use properties
+- learning how to set state
+- using fetch to make API calls
+
+Weather data is from [Meta Weather](https://metaweather.com)
+Uses an [API proxy](https://gist.github.com/andybroomfield/8e10a61bc1e78e3cb1658397643baa49) (to implement CORS header and Cache)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
