@@ -1,36 +1,36 @@
 :root {
-	--bar-background-colour: #282c34;
-	--bar-foreground-colour: #fff;
-	--body-background-colour: #fff;
-	--body-foreground-colour: #000;
-	--link-colour: #61dafb;
-	--danger-colour: #a00;
-	--normal-font-size: 12px;
-	--mid-font-size: 16px;
-	--large-font-size: 20px;
-	--larger-font-size: 28px;
+  --bar-background-colour: #282c34;
+  --bar-foreground-colour: #fff;
+  --body-background-colour: #fff;
+  --body-foreground-colour: #000;
+  --link-colour: #61dafb;
+  --danger-colour: #a00;
+  --normal-font-size: 12px;
+  --mid-font-size: 16px;
+  --large-font-size: 20px;
+  --larger-font-size: 28px;
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
-	font-size: var(--normal-font-size);
+  font-weight: normal;
+  font-size: var(--normal-font-size);
 }
 
 .App {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-	min-height: 100vh;
+  min-height: 100vh;
 }
 
-.App-header, 
+.App-header,
 .App-footer {
-	background-color: var(--bar-background-colour);
-	color: var(--bar-foreground-colour);
+  background-color: var(--bar-background-colour);
+  color: var(--bar-foreground-colour);
 }
 
 .App-header {
@@ -43,15 +43,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .App-body {
-	flex-grow: 2;
-	padding: 20px 20px;
-	background-color: var(--body-background-colour);
-	color: var(--body-foreground-colour);
-	font-size: var(--normal-font-size);
+  flex-grow: 2;
+  padding: 20px 20px;
+  background-color: var(--body-background-colour);
+  color: var(--body-foreground-colour);
+  font-size: var(--normal-font-size);
 }
 
 .App-footer {
-	font-size: var(--normal-font-size);
+  font-size: var(--normal-font-size);
 }
 
 .App-link,
@@ -60,118 +60,118 @@ a {
 }
 
 .sr-only {
-	display: block;
-	width: 1px;
-	height: 1px;
-	text-indent: -9999px;
+  display: block;
+  width: 1px;
+  height: 1px;
+  text-indent: -9999px;
 }
 
 /** App Header */
 .App-header h1 {
-	font-size: var(--large-font-size);
+  font-size: var(--large-font-size);
 }
 
 /** Location Search */
 .location-search {
-	font-size: 18px;
-	text-align: left;
+  font-size: 18px;
+  text-align: left;
 }
 
 .location-search input.form-text {
-	display: block;
-	width: 100%;
-	background: transparent;
-	border: 1px solid var(--body-foreground-colour);
-	padding: 12px;
-	font-size: var(--large-font-size);
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--body-foreground-colour);
+  padding: 12px;
+  font-size: var(--large-font-size);
 }
 
 /** Location list */
 ul.location-list {
-	display: block;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	border-left: 1px solid var(--body-foreground-colour);
-	border-right: 1px solid var(--body-foreground-colour);
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--body-foreground-colour);
+  border-right: 1px solid var(--body-foreground-colour);
 }
 
 ul.location-list li {
-	border-bottom: 1px solid var(--body-foreground-colour);
+  border-bottom: 1px solid var(--body-foreground-colour);
 }
 ul.location-list li a {
-	display: block;
-	width: 100%;
-	padding: 12px;
-	text-decoration: none;
-	color: var(--body-foreground-colour);
+  display: block;
+  width: 100%;
+  padding: 12px;
+  text-decoration: none;
+  color: var(--body-foreground-colour);
 }
 
 ul.location-list li a:hover,
 ul.location-list li a:focus {
-	background-color: var(--link-colour);
-	--body-foreground-colour: #fff;
+  background-color: var(--link-colour);
+  --body-foreground-colour: #fff;
 }
 
 /** Cancel Button */
 button.cancel-button {
-	display: block;
-	width: 100%;
-	padding: 12px;
-	appearance: none;
-	background-color: var(--danger-colour);
-	color: #fff;
-	border: none;
-	font-size: var(--mid-font-size);
+  display: block;
+  width: 100%;
+  padding: 12px;
+  appearance: none;
+  background-color: var(--danger-colour);
+  color: #fff;
+  border: none;
+  font-size: var(--mid-font-size);
 }
 
 /** Location Name */
 .location-name {
-	font-size: var(--larger-font-size);
+  font-size: var(--larger-font-size);
 }
 
 /** Forecast */
 .forecast-day {
-	font-size: var(--mid-font-size);
+  font-size: var(--mid-font-size);
 }
 
 .forecast-text {
-	font-size: var(--large-font-size);
+  font-size: var(--large-font-size);
 }
 
 .forecast-temp {
-	font-size: var(--mid-font-size);
+  font-size: var(--mid-font-size);
 }
 
 /** Forecast date select */
 ul.forecast-date-select {
-	display: flex;
-	list-style-type: none;
-	justify-content: center;
-	margin: 20px -1px 0;
-	padding: 0;
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  margin: 20px -1px 0;
+  padding: 0;
 }
 
 ul.forecast-date-select li {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 50px;
-	height: 50px;
-	background-color: #ddd;
-	margin: 0 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: #ddd;
+  margin: 0 1px;
 }
 ul.forecast-date-select li a {
-	display: block;
-	width: 100%;
-	height: 100%;
-	line-height: 50px;
-	text-align: center;
-	vertical-align: middle;
-	color: var(--body-foreground-colour);
-	text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  color: var(--body-foreground-colour);
+  text-decoration: none;
 }
 
 ul.forecast-date-select li a.active {
-	background-color: var(--link-colour);
+  background-color: var(--link-colour);
 }
