@@ -88,15 +88,44 @@ class LocationSearch extends Component {
 
 class ForecastDetail extends Component {
 	
+	getWeatherIcon() {
+		const icons = {
+			sn: 'snow',
+			sl: 'snow',
+			h: 'hail',
+			t: 'lightning',
+			hr: 'rain',
+			lr: 'drizzle',
+			s: 'rain',
+			hc: 'fog',
+			lc: 'cloud',
+			c: 'sun'
+		}
+		
+		return './icons/weather-'+icons[this.props.weather.weather_state_abbr]+'.svg';
+	}
+	
+	getWeatherStateName() {
+		if (this.props.weather.weather_state_name == 'Clear' && parseFloat(this.props.weather.the_temp) >= 15 ) {
+			return 'Sunny';
+		}
+		return this.props.weather.weather_state_name;
+	}
+	
 	render() {
-		return (
-			<div className="forecast-detail">
-				<h2 className="forecast-day">Today</h2>
-				<img className="forecast-icon" src="./icons/weather-sun.svg" />
-				<p className="forecast-text">Sunny</p>
-				<p className="forecast-temp">30&deg;C</p>
-			</div>
-		);
+		
+		if (typeof(this.props.weather) === 'undefined') {
+			return null;
+		} else {
+			return (
+				<div className="forecast-detail">
+					<h2 className="forecast-day">Today</h2>
+					<img className="forecast-icon" src={this.getWeatherIcon()} />
+					<p className="forecast-text">{this.getWeatherStateName()}</p>
+					<p className="forecast-temp">{parseFloat(this.props.weather.the_temp).toFixed(1)}&deg;C</p>
+				</div>
+			);
+		}
 	}
 }
 
@@ -120,7 +149,9 @@ class Forecast extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			location: '---'
+			location: '---',
+			weather: [],
+			day: 0
 		};
 	}
 	
@@ -130,7 +161,8 @@ class Forecast extends Component {
 			.then(data => {
 				console.log(data);
 				this.setState({
-						location: data.title
+						location: data.title,
+						weather: data.consolidated_weather
 					});
 				});
 	}
@@ -140,10 +172,12 @@ class Forecast extends Component {
 	}
 	
 	render() {
+		const displayWeather = this.state.weather[this.state.day];
+		
 		return (
 			<div className="forecast">
 				<h2 className="location-name"><a href="#" onClick={this.props.onClick}>{this.state.location}</a></h2>
-				<ForecastDetail />
+				<ForecastDetail weather={displayWeather} />
 				<ForecastDateSelect />
 			</div>
 		);
