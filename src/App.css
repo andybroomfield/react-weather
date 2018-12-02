@@ -108,7 +108,8 @@ ul.location-list li a {
 }
 
 ul.location-list li a:hover,
-ul.location-list li a:focus {
+ul.location-list li a:focus,
+ul.location-list li a.active {
   background-color: var(--link-colour);
   --body-foreground-colour: #fff;
 }

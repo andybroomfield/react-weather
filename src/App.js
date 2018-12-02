@@ -19,10 +19,7 @@ class LocationForm extends Component {
       <form className="location-form">
         <div className="form-input">
           <label htmlFor="location" className="sr-only">Location</label>
-          <input autoFocus type="text" name="location" className="form-text" placeholder="Search for a city" onChange={this.onSearchValueChange}></input>
-        </div>
-        <div className="sr-only">
-          <button>Search</button>
+          <input type="text" name="location" className="form-text" placeholder="Search for a city" onChange={this.onSearchValueChange} ref="locationInput"></input>
         </div>
       </form>
     );
@@ -36,9 +33,9 @@ class LocationList extends Component {
       return (
         <li key={index}>
           <a href={'#'+row.woeid} onClick={(e) => {
-              e.preventDefault();
-              this.props.changeCity(row.woeid)}
-          }>{row.title}</a>
+            e.preventDefault();
+            this.props.changeCity(row.woeid)
+          }} className={index == this.props.chosenResult? 'x-active' : null} ref={'locationResult_'+index}>{row.title}</a>
         </li>
       );
     });
@@ -57,7 +54,8 @@ class LocationSearch extends Component {
     super(props);
     this.state = {
       searchValue: '',
-      searchResults: []
+      searchResults: [],
+      chosenResult: -1
     };
 
     this.searchForLocations = this.searchForLocations.bind(this);
@@ -69,20 +67,75 @@ class LocationSearch extends Component {
       .then(data => {
         this.setState({
           searchValue: query,
-          searchResults: data.slice(0, 10)
+          searchResults: data.slice(0, 10),
+          chosenResult: -1
         });
       });
   }
 
+  handleKeyDownArrow() {
+    const chosenResult = parseInt(this.state.chosenResult);
+    if (!isNaN(chosenResult) && chosenResult < this.state.searchResults.length - 1) {
+      this.setState({chosenResult: chosenResult + 1});
+    }
+  }
+
+  handleKeyUpArrow() {
+    const chosenResult = parseInt(this.state.chosenResult);
+    if (!isNaN(chosenResult) && chosenResult > -1) {
+      this.setState({chosenResult: chosenResult - 1});
+    }
+  }
+
+  handleEnterKey() {
+    const chosenResult = parseInt(this.state.chosenResult);
+    if (!isNaN(chosenResult) && typeof(this.state.searchResults[chosenResult].woeid) !== 'undefined') {
+      this.props.changeCity(this.state.searchResults[chosenResult].woeid);
+    }
+  }
+
+  updateFocusElement() {
+    const chosenResult = parseInt(this.state.chosenResult);
+    if (chosenResult === -1) {
+      this.refs.locationForm.refs.locationInput.focus();
+    } else if (typeof(this.refs.locationList.refs['locationResult_' + chosenResult]) !== 'undefined') {
+      this.refs.locationList.refs['locationResult_' + chosenResult].focus();
+    }
+  }
+
   render() {
+
     return (
-      <div className="location-search">
-        <LocationForm searchForLocations={this.searchForLocations} />
-        <LocationList searchResults={this.state.searchResults} changeCity={this.props.changeCity} />
+      <div className="location-search" onKeyDown={(e) => {
+          if (/*e.keyCode !== 13 && */e.keyCode !== 38 && e.keyCode !== 40) {
+            return;
+          }
+          e.preventDefault();
+          if (e.keyCode === 13){
+            // Enter
+            this.handleEnterKey();
+          } else if (e.keyCode === 38) {
+            // Up Arrow
+            this.handleKeyUpArrow();
+          } else if (e.keyCode === 40) {
+            // Down Arrow
+            this.handleKeyDownArrow();
+          }
+        }}>
+        <LocationForm searchForLocations={this.searchForLocations} ref="locationForm" />
+        <LocationList searchResults={this.state.searchResults} changeCity={this.props.changeCity} chosenResult={this.state.chosenResult} ref="locationList" />
         <button className="cancel-button" onClick={this.props.changeViewFromClick}>Cancel</button>
       </div>
     );
 
+  }
+
+  componentDidMount() {
+    this.updateFocusElement();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.updateFocusElement();
   }
 }
 
