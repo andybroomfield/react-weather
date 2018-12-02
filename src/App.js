@@ -64,7 +64,7 @@ class LocationSearch extends Component {
   }
 
   searchForLocations(query) {
-    fetch('https://api-proxy.newmediathinking.com/metaweather.php?method=location/search&query='+query)
+    fetch('https://api-proxy.newmediathinking.com/metaweather.php?method=location/search&query='+encodeURI(query))
       .then(response => response.json())
       .then(data => {
         this.setState({
