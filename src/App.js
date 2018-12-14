@@ -19,7 +19,7 @@ class LocationForm extends Component {
       <form className="location-form">
         <div className="form-input">
           <label htmlFor="location" className="sr-only">Location</label>
-          <input type="text" name="location" className="form-text" placeholder="Search for a city" onChange={this.onSearchValueChange} ref="locationInput"></input>
+          <input type="text" name="location" className="form-text" placeholder="Search for a city" onChange={this.onSearchValueChange}></input>
         </div>
       </form>
     );
@@ -35,7 +35,7 @@ class LocationList extends Component {
           <a href={'#'+row.woeid} onClick={(e) => {
             e.preventDefault();
             this.props.changeCity(row.woeid)
-          }} className={index == this.props.chosenResult? 'x-active' : null} ref={'locationResult_'+index}>{row.title}</a>
+          }} className={index == this.props.chosenResult? 'active' : null}>{row.title}</a>
         </li>
       );
     });
@@ -94,20 +94,11 @@ class LocationSearch extends Component {
     }
   }
 
-  updateFocusElement() {
-    const chosenResult = parseInt(this.state.chosenResult);
-    if (chosenResult === -1) {
-      this.refs.locationForm.refs.locationInput.focus();
-    } else if (typeof(this.refs.locationList.refs['locationResult_' + chosenResult]) !== 'undefined') {
-      this.refs.locationList.refs['locationResult_' + chosenResult].focus();
-    }
-  }
-
   render() {
 
     return (
       <div className="location-search" onKeyDown={(e) => {
-          if (/*e.keyCode !== 13 && */e.keyCode !== 38 && e.keyCode !== 40) {
+          if (e.keyCode !== 13 && e.keyCode !== 38 && e.keyCode !== 40) {
             return;
           }
           e.preventDefault();
@@ -128,14 +119,6 @@ class LocationSearch extends Component {
       </div>
     );
 
-  }
-
-  componentDidMount() {
-    this.updateFocusElement();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    this.updateFocusElement();
   }
 }
 
