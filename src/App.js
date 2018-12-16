@@ -56,9 +56,7 @@ class App extends Component {
           <h1>React Weather</h1>
         </header>
         <div className="App-body">
-          <div className="weather">
-            {this.renderActiveView()}
-          </div>
+          {this.renderActiveView()}
         </div>
         <footer className="App-footer">
           <p>&copy; Andy Broomfield 2018</p>
