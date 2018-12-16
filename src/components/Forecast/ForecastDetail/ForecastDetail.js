@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import './ForecastDetail.css';
 
 export default class ForecastDetail extends Component {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import LocationSearch from './components/LocationSearch/LocationSearch';
-import Forecast from './components/Forecast/Forecast';
-
 //import logo from './logo.svg';
 import './App.css';
+
+import LocationSearch from './components/LocationSearch/LocationSearch';
+import Forecast from './components/Forecast/Forecast';
 
 class App extends Component {
 

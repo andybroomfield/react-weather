@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import './LocationForm.css';
 
 export default class LocationForm extends Component {

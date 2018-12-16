@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import './ForecastDateSelect.css';
 
 export default class ForecastDateSelect extends Component {

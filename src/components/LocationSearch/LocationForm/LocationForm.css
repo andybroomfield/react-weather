@@ -1,0 +1,21 @@
+/**Location Form */
+.location-form input.form-text {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--body-foreground-colour);
+  padding: 12px;
+  font-size: var(--large-font-size);
+}
+
+/** Cancel Button */
+button.cancel-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  appearance: none;
+  background-color: var(--danger-colour);
+  color: #fff;
+  border: none;
+  font-size: var(--mid-font-size);
+}

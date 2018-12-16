@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import './Forecast.css';
 import ForecastDetail from './ForecastDetail/ForecastDetail';
 import ForecastDateSelect from './ForecastDateSelect/ForecastDateSelect';
-
-import './Forecast.css';
 
 export default class Forecast extends Component {
 

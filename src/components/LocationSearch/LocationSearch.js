@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import './LocationSearch.css';
+
 import LocationForm from './LocationForm/LocationForm';
 import LocationList from './LocationList/LocationList';
-
-import './LocationSearch.css';
 
 export default class LocationSearch extends Component {
 
