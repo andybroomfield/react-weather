@@ -71,7 +71,11 @@ export default class LocationSearch extends Component {
         }}>
         <LocationForm searchForLocations={this.searchForLocations} ref="locationForm" />
         <LocationList searchResults={this.state.searchResults} changeCity={this.props.changeCity} chosenResult={this.state.chosenResult} ref="locationList" />
-        <button className="cancel-button" onClick={this.props.changeViewFromClick}>Cancel</button>
+        { // display cancel button only if existing city selected
+          this.props.woeid !== null ?
+          <button className="cancel-button" onClick={this.props.changeViewFromClick}>Cancel</button>
+          : null
+        }
       </div>
     );
 
