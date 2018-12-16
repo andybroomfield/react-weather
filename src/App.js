@@ -10,7 +10,7 @@ class App extends Component {
     super(props);
     this.state = {
       activeView: 'LocationSearch',
-      woeid: 13911, // Brighton
+      woeid: null,
       forecastResponse: null,
     };
 
@@ -40,7 +40,7 @@ class App extends Component {
   renderActiveView() {
     if (this.state.activeView === 'LocationSearch') {
       return (
-        <LocationSearch changeViewFromClick={this.changeViewFromClick} changeCity={this.changeCity} />
+        <LocationSearch changeViewFromClick={this.changeViewFromClick} changeCity={this.changeCity} woeid={this.state.woeid} />
       );
     } else if (this.state.activeView === 'Forecast') {
       return (
