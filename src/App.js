@@ -59,7 +59,7 @@ class App extends Component {
           {this.renderActiveView()}
         </div>
         <footer className="App-footer">
-          <p>&copy; Andy Broomfield 2018</p>
+          <p>&copy; <a href="https://andybroomfield.com">Andy Broomfield</a> 2018 - <a href="https://github.com/andybroomfield/react-weather">View Source Code</a></p>
           <p>Weather data from <a href="https://www.metaweather.com">metaweather.com</a></p>
         </footer>
       </div>
