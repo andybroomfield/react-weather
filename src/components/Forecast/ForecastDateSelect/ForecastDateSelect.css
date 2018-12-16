@@ -1,0 +1,32 @@
+/** Forecast date select */
+ul.forecast-date-select {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  margin: 20px -1px 0;
+  padding: 0;
+}
+
+ul.forecast-date-select li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: #ddd;
+  margin: 0 1px;
+}
+ul.forecast-date-select li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  color: var(--body-foreground-colour);
+  text-decoration: none;
+}
+
+ul.forecast-date-select li a.active {
+  background-color: var(--link-colour);
+}

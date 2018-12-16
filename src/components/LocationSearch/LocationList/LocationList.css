@@ -1,0 +1,27 @@
+/** Location List */
+ul.location-list {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--body-foreground-colour);
+  border-right: 1px solid var(--body-foreground-colour);
+}
+
+ul.location-list li {
+  border-bottom: 1px solid var(--body-foreground-colour);
+}
+ul.location-list li a {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  text-decoration: none;
+  color: var(--body-foreground-colour);
+}
+
+ul.location-list li a:hover,
+ul.location-list li a:focus,
+ul.location-list li a.active {
+  background-color: var(--link-colour);
+  --body-foreground-colour: #fff;
+}

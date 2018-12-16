@@ -1,0 +1,12 @@
+/** Forecast Detail */
+.forecast-day {
+  font-size: var(--mid-font-size);
+}
+
+.forecast-text {
+  font-size: var(--large-font-size);
+}
+
+.forecast-temp {
+  font-size: var(--mid-font-size);
+}

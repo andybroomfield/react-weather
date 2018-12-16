@@ -1,3 +1,20 @@
+:root {
+  --bar-background-colour: #282c34;
+  --bar-foreground-colour: #fff;
+  --body-background-colour: #fff;
+  --body-foreground-colour: #000;
+  --link-colour: #61dafb;
+  --danger-colour: #a00;
+  --normal-font-size: 12px;
+  --mid-font-size: 16px;
+  --large-font-size: 20px;
+  --larger-font-size: 28px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -11,4 +28,16 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: var(--normal-font-size);
+}
+
+.sr-only {
+  display: block;
+  width: 1px;
+  height: 1px;
+  text-indent: -9999px;
 }
