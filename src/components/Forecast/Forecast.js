@@ -13,6 +13,7 @@ export default class Forecast extends Component {
       day: 0
     };
 
+    // Bind changeDay to this class as passed down to ForecastDateSelect as property
     this.changeDay = this.changeDay.bind(this);
   }
 
@@ -23,6 +24,7 @@ export default class Forecast extends Component {
   }
 
   getWeather() {
+    // do API call and add respone to weather state
     fetch('https://api-proxy.newmediathinking.com/metaweather.php?method=location/'+this.props.woeid)
       .then(response => response.json())
       .then(data => {
@@ -34,10 +36,12 @@ export default class Forecast extends Component {
   }
 
   componentWillMount() {
+    // make API request onece component is loaded
     this.getWeather();
   }
 
   render() {
+    // get selected days weather
     const displayWeather = this.state.weather[this.state.day];
 
     return (

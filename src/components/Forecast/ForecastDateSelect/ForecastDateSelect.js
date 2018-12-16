@@ -4,12 +4,12 @@ import './ForecastDateSelect.css';
 export default class ForecastDateSelect extends Component {
 
   getShortDate(forecastDateStr) {
-
     const forecastDate = new Date(forecastDateStr);
     return forecastDate.toLocaleDateString('en-US', { weekday: 'narrow' });
   }
 
   render() {
+    // short circuit return if we don't have weather data for multiple days
     if (!Array.isArray(this.props.allWeather)) {
       return null;
     }

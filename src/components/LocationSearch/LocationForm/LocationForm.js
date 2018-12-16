@@ -6,6 +6,7 @@ export default class LocationForm extends Component {
   constructor(props) {
     super(props);
 
+    // bind this in onSearchValueChange to class as used on change event
     this.onSearchValueChange = this.onSearchValueChange.bind(this);
   }
 

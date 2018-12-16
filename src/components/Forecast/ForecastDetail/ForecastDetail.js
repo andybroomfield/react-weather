@@ -4,6 +4,7 @@ import './ForecastDetail.css';
 export default class ForecastDetail extends Component {
 
   getForecastDate() {
+    // compare dates to either return today or the day name
     let todayDate = new Date();
     let forecastDate = new Date(this.props.weather.applicable_date);
 
@@ -11,6 +12,7 @@ export default class ForecastDetail extends Component {
   }
 
   getWeatherIcon() {
+    // icon names to match with metaweather.com shortcodes
     const icons = {
       sn: 'snow',
       sl: 'snow',
@@ -24,10 +26,12 @@ export default class ForecastDetail extends Component {
       c: 'sun'
     }
 
+    // display icon in 'public' assets directory
     return './icons/weather-'+icons[this.props.weather.weather_state_abbr]+'.svg';
   }
 
   getWeatherStateName() {
+    // if its a clear day and above 15deg C say it is 'Sunny' instead of 'Clear'
     if (this.props.weather.weather_state_name == 'Clear' && parseFloat(this.props.weather.the_temp) >= 15 ) {
       return 'Sunny';
     }
@@ -35,7 +39,7 @@ export default class ForecastDetail extends Component {
   }
 
   render() {
-
+    // short circuit if no weather to display, else render markup
     if (typeof(this.props.weather) === 'undefined') {
       return null;
     } else {

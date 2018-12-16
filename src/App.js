@@ -14,6 +14,7 @@ class App extends Component {
       forecastResponse: null,
     };
 
+    // Bind 'this' to App class as these functions are passed through as properties
     this.changeViewFromClick = this.changeViewFromClick.bind(this);
     this.changeCity = this.changeCity.bind(this);
 
