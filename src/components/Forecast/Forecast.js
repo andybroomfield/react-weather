@@ -46,7 +46,7 @@ export default class Forecast extends Component {
 
     return (
       <div className="forecast">
-        <h2 className="location-name"><a href="#" onClick={this.props.changeViewFromClick}>{this.state.location}</a></h2>
+        <h2 className="location-name"><a href="#location-form" onClick={this.props.changeViewFromClick}>{this.state.location}</a></h2>
         <ForecastDetail weather={displayWeather} />
         <ForecastDateSelect allWeather={this.state.weather} selectedDay={this.state.day} changeDay={this.changeDay} />
       </div>
