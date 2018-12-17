@@ -19,7 +19,7 @@ export default class LocationForm extends Component {
       <form className="location-form">
         <div className="form-input">
           <label htmlFor="location" className="sr-only">Location</label>
-          <input type="text" name="location" className="form-text" placeholder="Search for a city" autocomplete="off" onChange={this.onSearchValueChange}></input>
+          <input type="text" name="location" className="form-text" placeholder="Search for a city" autoComplete="off" onChange={this.onSearchValueChange}></input>
         </div>
       </form>
     );
