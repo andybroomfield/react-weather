@@ -46,7 +46,7 @@ export default class ForecastDetail extends Component {
       return (
         <div className="forecast-detail">
           <h2 className="forecast-day">{this.getForecastDate()}</h2>
-          <img className="forecast-icon" src={this.getWeatherIcon()} />
+          <img className="forecast-icon" src={this.getWeatherIcon()} alt="" />
           <p className="forecast-text">{this.getWeatherStateName()}</p>
           <p className="forecast-temp">{parseFloat(this.props.weather.the_temp).toFixed(1)}&deg;C</p>
         </div>
