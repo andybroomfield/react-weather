@@ -32,7 +32,7 @@ export default class ForecastDetail extends Component {
 
   getWeatherStateName() {
     // if its a clear day and above 15deg C say it is 'Sunny' instead of 'Clear'
-    if (this.props.weather.weather_state_name == 'Clear' && parseFloat(this.props.weather.the_temp) >= 15 ) {
+    if (this.props.weather.weather_state_name === 'Clear' && parseFloat(this.props.weather.the_temp) >= 15 ) {
       return 'Sunny';
     }
     return this.props.weather.weather_state_name;

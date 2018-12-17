@@ -10,7 +10,7 @@ export default class LocationList extends Component {
           <a href={'#'+row.woeid} onClick={(e) => {
             e.preventDefault();
             this.props.changeCity(row.woeid)
-          }} className={index == this.props.chosenResult? 'active' : null}>{row.title}</a>
+          }} className={index === this.props.chosenResult? 'active' : null}>{row.title}</a>
         </li>
       );
     });
